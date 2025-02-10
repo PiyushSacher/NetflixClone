@@ -2,23 +2,53 @@ import { signOut } from "firebase/auth";
 import React from "react";
 import { auth } from "../utils/firebase";
 import { useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+import { onAuthStateChanged } from "firebase/auth";
+import { addUser } from "../utils/userSlice";
+import { removeUser } from "../utils/userSlice";
 
 const Header = () => {
   const user = useSelector((store) => store.user);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const handleSignOut = () => {
     signOut(auth)
       .then(() => {
         //sign-out successful
-        navigate("/");
       })
       .catch((error) => {
         // sign-out failed
         navigate("/error");
       });
   };
+
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      if (user) {
+        //sign-in block
+        const userObject = user;
+        dispatch(
+          addUser({
+            uid: userObject.uid,
+            email: userObject.email,
+            displayName: userObject.displayName,
+          })
+        );
+        navigate("/browse");
+      } else {
+        //sign-out block
+        dispatch(removeUser());
+        navigate("/");
+      }
+    });
+    
+    //unsubscribe when component unmounts
+    return ()=> unsubscribe();
+        
+    
+  }, []);
 
   return (
     <div className="absolute px-8 py-2 bg bg-gradient-to-b from-black z-10 w-screen flex justify-between">
@@ -37,7 +67,6 @@ const Header = () => {
           ></img>
 
           <button className="font-bold text-white" onClick={handleSignOut}>
-            {" "}
             Sign Out
           </button>
         </div>

@@ -68,7 +68,7 @@ const Login = () => {
               );
               //profile updated
               console.log(user);
-              navigate("/browse");
+              // navigate("/browse");
             })
             .catch((error) => {
               //an error occured
@@ -91,7 +91,7 @@ const Login = () => {
           //signed in
           const user = userCredential.user;
           console.log(user);
-          navigate("/browse");
+          //navigate("/browse");
         })
         .catch((error) => {
           const errorCode = error.code;
