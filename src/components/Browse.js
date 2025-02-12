@@ -3,11 +3,13 @@ import Header from "./Header";
 import useNowPlayingMovies from "../hooks/useNowPlayingMovies";
 import MainCointainer from "./MainCointainer";
 import SecondaryCointainer from "./SecondaryCointainer";
+import usePopularMovies from "../hooks/usePopularMovies";
 
 
 const Browse = () => {
 
   useNowPlayingMovies();
+  usePopularMovies();
 
   return (
     <div>
@@ -24,7 +26,7 @@ const Browse = () => {
       }
       <MainCointainer/>
       <SecondaryCointainer/>
-      Browse
+      
     </div>
   );
 };

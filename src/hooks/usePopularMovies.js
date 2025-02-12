@@ -1,17 +1,18 @@
 import { useDispatch, useSelector } from "react-redux";
-import { addNowPlayingMovies } from "../utils/moviesSlice";
+import { addPopularMovies } from "../utils/moviesSlice";
 import { useEffect } from "react";
 import { Api_options } from "../utils/constants";
 
 //fetch data from tmbd api and update store
 //const dispatch = useDispatch();
 
-const useNowPlayingMovies = () => {
+const usePopularMovies = () => {
   const dispatch = useDispatch();
 
-  const getNowPlayingMovies = async () => {
+
+  const getPopularMovies = async () => {
     const data = await fetch(
-      "https://api.themoviedb.org/3/movie/now_playing?language=en-US&page=1",
+      "https://api.themoviedb.org/3/movie/popular?page=1",
 
       Api_options
     );
@@ -19,7 +20,7 @@ const useNowPlayingMovies = () => {
     const json = await data.json();
     //array of movies coming
     console.log(json.results);
-    dispatch(addNowPlayingMovies(json.results));
+    dispatch(addPopularMovies(json.results));
 
     //but why our api is called 2 times?
     //this happens because of react's strict mode, see index.js file , our code is wrapped inside React.strictMode, it happens oly in your local
@@ -28,8 +29,8 @@ const useNowPlayingMovies = () => {
   };
 
   useEffect(() => {
-    getNowPlayingMovies();
+    getPopularMovies();
   },[]);
 };
 
-export default useNowPlayingMovies;
+export default usePopularMovies;
