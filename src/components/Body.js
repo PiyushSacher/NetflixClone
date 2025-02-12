@@ -22,7 +22,7 @@ const Body = () => {
         }
     ])
 
-    useEffect(()=>{
+   useEffect(()=>{
         onAuthStateChanged(auth,(user)=>{
             if(user){
                 //sign-in block
