@@ -106,7 +106,7 @@ const Login = () => {
     <div>
       <Header />
       <div className="absolute">
-        <img
+        <img className="h-screen object-cover"
           src={BG_Image}
           alt="logo"
         ></img>
@@ -114,7 +114,7 @@ const Login = () => {
 
       <form
         onSubmit={(e) => e.preventDefault()}
-        className="absolute p-10 bg-black w-3/12  my-36 mx-auto right-0 left-0 text-white bg-opacity-80"
+        className="absolute p-10 bg-black w-full md:w-3/12  my-36 mx-auto right-0 left-0 text-white bg-opacity-80"
       >
         {/* logic of h1 here according to the state variable */}
         <h1 className="font-bold text-4xl py-4 ">

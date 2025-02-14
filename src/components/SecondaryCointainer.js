@@ -15,7 +15,7 @@ const SecondaryCointainer = () => {
       -now playing (moviecards*n)
       -horror (moviecards*n)
       */}
-        <div className="-mt-52 pl-10 relative z-20">
+        <div className="mt-0 md:-mt-52 pl-4 md:pl-10 relative z-20">
           <MovieList title={"Now Playing"} movies={movies} />
           <MovieList title={"Popular"} movies={popularMovies} />
           <MovieList title={"Trending"} movies={movies} />
