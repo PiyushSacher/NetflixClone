@@ -8,6 +8,7 @@ import { Api_options } from "../utils/constants";
 
 const usePopularMovies = () => {
   const dispatch = useDispatch();
+  const popularmovies=useSelector((store)=>store.movies.popularMovies);
 
 
   const getPopularMovies = async () => {
@@ -29,7 +30,7 @@ const usePopularMovies = () => {
   };
 
   useEffect(() => {
-    getPopularMovies();
+    !popularmovies && getPopularMovies();
   },[]);
 };
 

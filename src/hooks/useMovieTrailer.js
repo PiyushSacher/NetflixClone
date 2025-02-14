@@ -7,6 +7,9 @@ const useMovieTrailer=(movieId)=>{
     //fetch trailer video and updating the store with trailerVideo
       const dispatch = useDispatch();
     //   const trailerVideo=useSelector((store)=>store.movies.trailer);
+
+
+    const trailer=useSelector((store=>store.movies.trailerVideo))
     
       const getMovieTrailer = async () => {
         const data = await fetch(
@@ -24,8 +27,10 @@ const useMovieTrailer=(movieId)=>{
         console.log(trailer);
         dispatch(addTrailerVideo(trailer));
       };
+
       useEffect(() => {
-        getMovieTrailer();
+        //will onlt be called if nowplayingmovies is empty
+        !trailer && getMovieTrailer();
       }, []);
 
 }

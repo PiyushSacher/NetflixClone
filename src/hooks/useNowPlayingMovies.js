@@ -8,6 +8,7 @@ import { Api_options } from "../utils/constants";
 
 const useNowPlayingMovies = () => {
   const dispatch = useDispatch();
+  const nowplayingmovies=useSelector((store=>store.movies.nowPlayingMovies))
 
   const getNowPlayingMovies = async () => {
     const data = await fetch(
@@ -28,7 +29,7 @@ const useNowPlayingMovies = () => {
   };
 
   useEffect(() => {
-    getNowPlayingMovies();
+    !nowplayingmovies && getNowPlayingMovies();
   },[]);
 };
 
